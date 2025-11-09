@@ -2,14 +2,29 @@
 
 export default function TechStackSection() {
   const technologies = [
-    { name: "React", icon: "⚛️" },
-    { name: "Node.js", icon: "🟢" },
-    { name: "AWS", icon: "☁️" },
-    { name: "MongoDB", icon: "🍃" },
-    { name: "Docker", icon: "🐳" },
-    { name: "Kubernetes", icon: "☸️" },
-    { name: "PostgreSQL", icon: "🐘" },
-    { name: "GraphQL", icon: "◆" },
+    // Frontend
+    { name: "React", icon: "⚛️", category: "Frontend" },
+    { name: "Next.js", icon: "▲", category: "Frontend" },
+    { name: "TypeScript", icon: "📘", category: "Frontend" },
+    { name: "Tailwind", icon: "🎨", category: "Frontend" },
+    // Backend
+    { name: "Node.js", icon: "🟢", category: "Backend" },
+    { name: "Express", icon: "⚡", category: "Backend" },
+    { name: "Python", icon: "🐍", category: "Backend" },
+    // Database
+    { name: "MongoDB", icon: "🍃", category: "Database" },
+    { name: "PostgreSQL", icon: "🐘", category: "Database" },
+    { name: "Firebase", icon: "🔥", category: "Database" },
+    // DevOps & Cloud
+    { name: "AWS", icon: "☁️", category: "Cloud" },
+    { name: "Docker", icon: "🐳", category: "DevOps" },
+    { name: "Kubernetes", icon: "☸️", category: "DevOps" },
+    { name: "CI/CD", icon: "🔄", category: "DevOps" },
+    // APIs & Tools
+    { name: "GraphQL", icon: "◆", category: "APIs" },
+    { name: "REST API", icon: "🌐", category: "APIs" },
+    { name: "Git", icon: "📦", category: "Tools" },
+    { name: "VS Code", icon: "💻", category: "Tools" },
   ]
 
   return (
@@ -22,7 +37,7 @@ export default function TechStackSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
           {technologies.map((tech, idx) => (
             <div
               key={idx}
@@ -30,6 +45,7 @@ export default function TechStackSection() {
             >
               <span className="text-4xl mb-2 group-hover:scale-110 transition-transform">{tech.icon}</span>
               <p className="text-sm font-semibold text-center">{tech.name}</p>
+              <p className="text-xs text-muted-foreground mt-1">{tech.category}</p>
             </div>
           ))}
         </div>

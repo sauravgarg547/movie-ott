@@ -13,35 +13,40 @@ export async function POST(request: Request) {
     const gmailPassword = process.env.GMAIL_APP_PASSWORD
     const adminEmail = process.env.ADMIN_EMAIL
 
-    if (!gmailUser || !gmailPassword) {
-      console.log("[v0] Missing email credentials:", { hasUser: !!gmailUser, hasPassword: !!gmailPassword })
+    console.log("[v0] Checking env vars - User:", !!gmailUser, "Pass:", !!gmailPassword, "Admin:", !!adminEmail)
+
+    if (!gmailUser || !gmailPassword || !adminEmail) {
+      console.log("[v0] Missing email credentials:", {
+        hasUser: !!gmailUser,
+        hasPassword: !!gmailPassword,
+        hasAdmin: !!adminEmail,
+      })
       return Response.json(
         {
-          message:
-            "Server configuration error: Email credentials not configured. Please add GMAIL_USER and GMAIL_APP_PASSWORD to environment variables.",
-          details: "Check your environment variables in the Vars section",
+          message: "Server configuration error: Email credentials not configured.",
+          details: "Please add GMAIL_USER, GMAIL_APP_PASSWORD, and ADMIN_EMAIL in the Vars section of the sidebar.",
         },
         { status: 500 },
       )
     }
 
     console.log("[v0] Creating transporter with Gmail user:", gmailUser)
+
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",
+      port: 587,
+      secure: false,
       auth: {
         user: gmailUser,
         pass: gmailPassword,
       },
     })
 
-    console.log("[v0] Sending emails...")
-
-    const adminMailTo = adminEmail || gmailUser
-    console.log("[v0] Admin email will be sent to:", adminMailTo)
+    console.log("[v0] Transporter created successfully")
 
     const adminMailOptions = {
       from: gmailUser,
-      to: adminMailTo,
+      to: adminEmail,
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -107,11 +112,11 @@ export async function POST(request: Request) {
       `,
     }
 
-    console.log("[v0] Sending admin email...")
+    console.log("[v0] Sending admin email to:", adminEmail)
     const adminResult = await transporter.sendMail(adminMailOptions)
     console.log("[v0] Admin email sent successfully:", adminResult.messageId)
 
-    console.log("[v0] Sending customer email...")
+    console.log("[v0] Sending customer email to:", email)
     const customerResult = await transporter.sendMail(customerMailOptions)
     console.log("[v0] Customer email sent successfully:", customerResult.messageId)
 
