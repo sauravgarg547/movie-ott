@@ -1,74 +1,53 @@
-"use client"
+import type { Metadata } from "next"
+import ClientHomePage from "./client-page"
 
-import { useEffect, useRef, useState } from "react"
-import Navbar from "@/components/navbar"
-import HeroSection from "@/components/hero-section"
-import ServicesSection from "@/components/services-section"
-import BenefitsSection from "@/components/benefits-section"
-import TechStackSection from "@/components/tech-stack-section"
-import StatsSection from "@/components/stats-section"
-import FeaturesSection from "@/components/features-section"
-import FooterSection from "@/components/footer-section"
-
-export default function Home() {
-  const containerRef = useRef(null)
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    // Simulate loading
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 1500)
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (isLoading) {
-    return <LoadingSkeleton />
-  }
-
-  return (
-    <div ref={containerRef} className="bg-background text-foreground overflow-hidden">
-      <Navbar />
-      <HeroSection />
-      <ServicesSection />
-      <BenefitsSection />
-      <TechStackSection />
-      <StatsSection />
-      <FeaturesSection />
-      <FooterSection />
-    </div>
-  )
+export const metadata: Metadata = {
+  title: "Professional Software Development Services | Tech Solutions",
+  description:
+    "Leading software development company offering web development, app development, and cloud solutions. Expert team with 10+ years experience.",
+  keywords: "software development, web development, app development, cloud solutions, IT consulting, software company",
+  authors: [{ name: "Tech Solutions" }],
+  creator: "Tech Solutions",
+  publisher: "Tech Solutions",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://yourdomain.com",
+    title: "Professional Software Development Services | Tech Solutions",
+    description: "Leading software development company offering web development, app development, and cloud solutions.",
+    siteName: "Tech Solutions",
+    images: [
+      {
+        url: "https://yourdomain.com/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Tech Solutions - Software Development",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Professional Software Development Services | Tech Solutions",
+    description: "Leading software development company offering web development, app development, and cloud solutions.",
+    creator: "@yourtwitterhandle",
+    images: ["https://yourdomain.com/og-image.png"],
+  },
+  alternates: {
+    canonical: "https://yourdomain.com",
+  },
 }
 
-function LoadingSkeleton() {
-  return (
-    <div className="min-h-screen bg-background flex flex-col">
-      {/* Navbar Skeleton */}
-      <div className="h-20 bg-card border-b border-border sticky top-0">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-full">
-          <div className="w-24 h-8 skeleton rounded"></div>
-          <div className="hidden md:flex gap-8">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="w-16 h-4 skeleton rounded"></div>
-            ))}
-          </div>
-          <div className="w-20 h-10 skeleton rounded-full hidden md:block"></div>
-        </div>
-      </div>
-
-      {/* Hero Skeleton */}
-      <div className="flex-1 flex flex-col justify-center items-center px-4 pt-20">
-        <div className="max-w-3xl w-full text-center">
-          <div className="w-full h-16 skeleton rounded mb-6 md:h-20"></div>
-          <div className="w-full h-12 skeleton rounded mb-4"></div>
-          <div className="w-3/4 h-8 skeleton rounded mb-8 mx-auto"></div>
-          <div className="flex gap-4 justify-center">
-            <div className="w-40 h-12 skeleton rounded-full"></div>
-            <div className="w-40 h-12 skeleton rounded-full"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
+export default function Home() {
+  return <ClientHomePage />
 }
