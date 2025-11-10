@@ -15,11 +15,22 @@ export default function TechStackSection() {
     { name: "MongoDB", icon: "🍃", category: "Database" },
     { name: "PostgreSQL", icon: "🐘", category: "Database" },
     { name: "Firebase", icon: "🔥", category: "Database" },
-    // DevOps & Cloud
+    // Cloud Platforms
     { name: "AWS", icon: "☁️", category: "Cloud" },
+    { name: "Azure", icon: "🔵", category: "Cloud" },
+    { name: "Google Cloud", icon: "📊", category: "Cloud" },
+    // DevOps & Container
     { name: "Docker", icon: "🐳", category: "DevOps" },
     { name: "Kubernetes", icon: "☸️", category: "DevOps" },
-    { name: "CI/CD", icon: "🔄", category: "DevOps" },
+    { name: "Jenkins", icon: "🔨", category: "DevOps" },
+    { name: "ArgoCD", icon: "🔄", category: "DevOps" },
+    // Infrastructure & IaC
+    { name: "Terraform", icon: "🏗️", category: "Infrastructure" },
+    { name: "Ansible", icon: "🤖", category: "Infrastructure" },
+    { name: "VPS Server", icon: "💾", category: "Infrastructure" },
+    // Monitoring & Logging
+    { name: "Prometheus", icon: "📈", category: "Monitoring" },
+    { name: "Grafana", icon: "📊", category: "Monitoring" },
     // APIs & Tools
     { name: "GraphQL", icon: "◆", category: "APIs" },
     { name: "REST API", icon: "🌐", category: "APIs" },
